@@ -1,0 +1,56 @@
+version: '3.4'
+
+# Defaults
+
+x-build-args-36: &build_args_36
+  IMAGE_TAG: "3.6-buster"
+
+x-build-args-37: &build_args_37
+  IMAGE_TAG: "3.7-buster"
+
+x-build-args-38: &build_args_38
+  IMAGE_TAG: "3.8-buster"
+
+services:
+
+  # Devbox
+  
+  dev: &dev
+    build: &dev_build
+      dockerfile: ./docker/Dockerfile
+      context: .
+    image: avro-to-bigquery-dev
+    command: /bin/bash
+    volumes:
+      - ./:/app
+
+  # Test & Lint suite
+  
+  test-36:
+    <<: *dev
+    build:
+      <<: *dev_build
+      args:
+        IMAGE: python:3.6-buster
+    image: avro-to-bigquery-test-36
+    command: docker/run_tests.sh
+  
+  test-37:
+    <<: *dev
+    build:
+      <<: *dev_build
+      args:
+        IMAGE: python:3.7-buster
+    image: avro-to-bigquery-test-37
+    command: docker/run_tests.sh
+  
+  # NOTE: test-38 command includes `--format-code` option that will
+  # apply changes when the lint suite is run
+  test-38:
+    <<: *dev
+    build:
+      <<: *dev_build
+      args:
+        IMAGE: python:3.8-buster
+    image: avro-to-bigquery-test-38
+    command: docker/run_tests.sh --format-code

@@ -1,7 +1,7 @@
 # Security Policies and Procedures
 
 This document outlines security procedures and general policies for the
-`<project name>` project.
+`avro-to-bigquery` project.
 
 - [Reporting a Bug](#reporting-a-bug)
 - [Disclosure Policy](#disclosure-policy)
@@ -9,9 +9,9 @@ This document outlines security procedures and general policies for the
 
 ## Reporting a Bug
 
-The `<project name>` team and community take all security bugs in
-`<project name>` seriously.  Thank you for improving the security of
-`<project name>`. We appreciate your efforts and responsible disclosure and
+The `avro-to-bigquery` team and community take all security bugs in
+`avro-to-bigquery` seriously.  Thank you for improving the security of
+`avro-to-bigquery`. We appreciate your efforts and responsible disclosure and
 will make every effort to acknowledge your contributions.
 
 Report security bugs by emailing `OpenSource@wayfair.com`.
