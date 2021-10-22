@@ -11,9 +11,6 @@ Avro to bigquery is a simple project to create a bigquery schema from an avro sc
 
 ### Installation`
 
-
-2. Install package
-
    ```sh
    pip install avro-to-bigquery
    ```
