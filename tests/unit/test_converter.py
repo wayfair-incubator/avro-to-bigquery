@@ -100,19 +100,13 @@ def test_convert_avro_schema_to_bigquery_schema():
                     },
                 ],
             },
-            {
-                "name": "map_field",
-                "type": {"type": "map", "values": "int"}
-            },
+            {"name": "map_field", "type": {"type": "map", "values": "int"}},
             {
                 "name": "complex_map",
                 "type": {
                     "type": "map",
-                    "values": {
-                        "type": "array",
-                        "items": "int"
-                    }
-                }
+                    "values": {"type": "array", "items": "int"},
+                },
             },
         ],
     }
