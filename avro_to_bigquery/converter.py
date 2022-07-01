@@ -91,6 +91,23 @@ def _convert_complex_type(avro_type):
             field_type = AVRO_TO_BIGQUERY_TYPES[avro_type["items"]]
     elif avro_type["type"] == "enum":
         field_type = AVRO_TO_BIGQUERY_TYPES[avro_type["type"]]
+    elif avro_type["type"] == "map":
+        field_type = "RECORD"
+        mode = "REPEATED"
+        # Create artificial fields to represent map in BQ
+        key_field = {
+            "name": "key",
+            "type": "string",
+            "doc": "Key for map avro field",
+        }
+        value_field = {
+            "name": "value",
+            "type": avro_type["values"],
+            "doc": "Value for map avro field",
+        }
+        fields = tuple(
+            map(lambda f: _convert_field(f), [key_field, value_field])
+        )
     elif "logicalType" in avro_type:
         field_type = AVRO_TO_BIGQUERY_TYPES[avro_type["logicalType"]]
     else:

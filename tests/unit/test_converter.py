@@ -100,6 +100,14 @@ def test_convert_avro_schema_to_bigquery_schema():
                     },
                 ],
             },
+            {"name": "map_field", "type": {"type": "map", "values": "int"}},
+            {
+                "name": "complex_map",
+                "type": {
+                    "type": "map",
+                    "values": {"type": "array", "items": "int"},
+                },
+            },
         ],
     }
 
@@ -107,7 +115,7 @@ def test_convert_avro_schema_to_bigquery_schema():
     s = convert_schema(avs)
 
     # assert
-    assert len(s) == 15
+    assert len(s) == 17
     assert s[0].name == "full_name"
     assert s[1].field_type == "INTEGER"
     assert s[2].description == "Just a boolean tester"
@@ -132,6 +140,16 @@ def test_convert_avro_schema_to_bigquery_schema():
     assert s[13].field_type == "DATE"
     assert s[13].mode == "REPEATED"
     assert s[14].field_type == "STRING"
+    assert s[15].name == "map_field"
+    assert s[15].field_type == "RECORD"
+    assert s[15].mode == "REPEATED"
+    assert s[15].fields[0].field_type == "STRING"
+    assert s[15].fields[1].field_type == "INTEGER"
+    assert s[15].fields[0].name == "key"
+    assert s[15].fields[1].name == "value"
+    assert s[16].fields[0].field_type == "STRING"
+    assert s[16].fields[1].field_type == "INTEGER"
+    assert s[16].fields[1].mode == "REPEATED"
 
 
 def test_incorrect_nullable_field():
