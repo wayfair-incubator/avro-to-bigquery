@@ -1,0 +1,19 @@
+name: Lint Renovate Config
+
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  pull_request: {}
+  push:
+      branches: ["main"]
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+      - name: 🧼 Lint # Validates changes to renovate.json config file
+        uses: suzuki-shunsuke/github-action-renovate-config-validator@v0.1.2
+        with:
+          config_file_path: 'renovate.json'

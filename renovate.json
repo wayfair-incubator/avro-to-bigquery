@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "labels": [
+    "renovate/{{depName}}"
+  ],
+  "extends": [
+    "config:base",
+    "schedule:earlyMondays",
+    ":dependencyDashboard",
+    ":rebaseStalePrs"
+  ],
+  "enabledManagers": [
+    "docker-compose",
+    "github-actions",
+    "pip_requirements"
+  ]
+}
