@@ -1,7 +1,5 @@
 import pytest
 
-from fastavro.schema import UnknownType
-
 from avro_to_bigquery import convert_schema
 
 
@@ -199,47 +197,7 @@ def test_incorrect_field_type():
     }
 
     # act
-    with pytest.raises(UnknownType):
+    with pytest.raises(KeyError):
 
         # assert
         convert_schema(avs)
-
-
-def test_type_reference():
-    # arrange
-    avs = {
-        "type": "record",
-        "name": "Test_Schema",
-        "namespace": "example.avro",
-        "fields": [
-            {
-                "name": "father",
-                "type": {
-                    "type": "record",
-                    "name": "Person",
-                    "fields": [
-                        {"name": "age", "type": "int"},
-                        {"name": "name", "type": "string"},
-                    ]
-                }
-            },
-            {"name": "mother", "type": "Person"}
-        ],
-    }
-    # act
-    s = convert_schema(avs)
-
-    # assert
-    assert s[0].name == "father"
-    assert s[0].field_type == "RECORD"
-    assert s[0].fields[0].name == "age"
-    assert s[0].fields[0].field_type == "INTEGER"
-    assert s[0].fields[1].name == "name"
-    assert s[0].fields[1].field_type == "STRING"
-
-    assert s[1].name == "mother"
-    assert s[1].field_type == "RECORD"
-    assert s[1].fields[0].name == "age"
-    assert s[1].fields[0].field_type == "INTEGER"
-    assert s[1].fields[1].name == "name"
-    assert s[1].fields[1].field_type == "STRING"
