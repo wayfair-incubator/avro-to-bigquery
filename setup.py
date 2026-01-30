@@ -8,10 +8,11 @@ import setuptools
 if __name__ == "__main__":
     setuptools.setup(
         name="avro-to-bigquery",
-        version="0.4.3",
+        version="0.5.0",
         packages=["avro_to_bigquery"],
         author="isaac",
         license="",
         author_email="fellipe.wurthmann@isaac.com.br",
-        description="Avro to BigQuery library"
+        description="Avro to BigQuery library",
+        python_requires="==3.12"
     )

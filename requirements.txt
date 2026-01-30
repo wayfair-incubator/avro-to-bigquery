@@ -1,1 +1,2 @@
-google-cloud-bigquery==2.27.1
+google-cloud-bigquery==3.28.0
+fastavro==1.9.7
